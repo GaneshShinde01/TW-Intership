@@ -1,0 +1,63 @@
+/*
+
+This is Ganesh Shinde, intern at #TopperWorld and this is my first task to build the Number Guessing Game with the Java Programming language
+ * I've used the simple to classes of util package. The first class helps to input the values from the user 
+ * through standred input devices.And the second one is used to generate a stream of pseudorandom numbers.
+ * 
+ * In this program the system own dicides the random number, and we need to provide guess number of our own
+ * then system will compare the guess number that random number and gives output accordingly.
+ * 
+ * we have choosen the range of numbers between 1 and 100. Player needs to guess out of them.
+ * 
+ * 
+ * I already tried to place comments after the operations.If not understand any, ****#feel free to suggest or corrections
+ */
+
+
+import java.util.Scanner; //for retriving the values from the user 
+import java.util.Random;  //used to find the random number 
+
+public class numbergame  //creating class with name numbergame
+{
+    public static void main(String[] args) 
+    {
+        Scanner scan = new Scanner(System.in);   //creating the object of the Scanner class as scan
+        Random random = new Random();    //similarly creating the object for the random class
+
+        int lowerBound = 1;     //lowest number
+        int upperBound = 100;   //highest number
+        int numberToGuess = random.nextInt(upperBound - lowerBound + 1) + lowerBound;
+         //System.out.println("random number is "+ randomnumber);
+        int maxAttempts = 10;
+        int attempts = 0;    //this is the counter variable initialised to 0
+
+        System.out.println(".....\1 \1Welcome to the Number Guessing Game!\1 \1.....");
+        System.out.println("\2Ganesh Shinde Wellcomes You!!\3\2");
+        System.out.println("I've selected a random number between " + lowerBound + " and " + upperBound + "."); //i.e. from 1 to 100 here
+        System.out.println("You have " + maxAttempts + " attempts to guess it.");
+
+        while (attempts < maxAttempts) {
+            System.out.print("Attempt " + (attempts + 1) + ": Enter your guess: ");
+            int playerGuess = scan.nextInt();  //return the next pseudorandom integer value
+            attempts++;   //increases the counter variable by 1
+
+            if (playerGuess < lowerBound || playerGuess > upperBound) //here checks the player's entered number is between the range or not. If it is in range then only the next progrom will run
+            {
+                System.out.println("Your guess is out of range!! Please guess between " + lowerBound + " and " + upperBound + ".");
+            } else if (playerGuess == numberToGuess)
+             {
+                System.out.println("Congratulations\3\2! You are like clever.. You've guessed the number " + numberToGuess + " correctly in " + attempts + " attempts.");
+                break;
+             } else {
+                System.out.println("Try " + (playerGuess < numberToGuess ? "higher" : "lower") + " next time.");
+            }
+        }
+
+        if (attempts == maxAttempts)  //if user is unable to guess in 10 attempts then automatically that number is displayed on the screen.. 
+         {
+            System.out.println("Out of attempts! The correct number was " + numberToGuess + "\2\2 Bye...");
+        }
+
+        scan.close();
+    }
+}
